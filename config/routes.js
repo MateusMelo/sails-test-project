@@ -23,10 +23,24 @@
 module.exports.routes = {
 
   'get /': {
-    view: 'homepage'
+    view: 'guest/login'
   },
   'get /signup': {
-    view: 'signup'
-  }
+    view: 'guest/signup'
+  },
+
+
+  'get /dashboard': {
+    view: 'user/dashboard',
+    locals: {
+      layout: 'internal'
+    }
+  },
+  'get /profile': {
+    view: 'user/profile',
+    locals: {
+      layout: 'internal'
+    }
+  },
 
 };
