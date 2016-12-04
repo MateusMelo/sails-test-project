@@ -139,7 +139,18 @@
                 e.preventDefault();
 
                 if(confirm('Deseja excluir esse usuário?')) {
-                    console.log('Kappa');
+                    var $form = $('<form></form>');
+
+                    $form.attr('method', 'POST');
+                    $form.attr('action', $(this).attr('href'));
+                    $form.append(
+                        $('<input>', 
+                          { type: 'text', 
+                            value: $(this).attr('data-id'), 
+                            name: 'id' }
+                    ));
+
+                    $form.submit();
                 }
 
             });

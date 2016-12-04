@@ -7,12 +7,14 @@
         </ol>
 
         <div class="search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar usuário...">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button">Buscar</button>
-                </span>
-            </div>
+            <form action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar usuário..." name="q" value="<%= (req.query && req.query.q) ? req.query.q : '' %>">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Buscar</button>
+                    </span>
+                </div>
+            </form>
         </div>
 
     	<table class="table table-hover">
@@ -24,21 +26,13 @@
 	    		</tr>
     		</thead>
     		<tbody>
-    			<tr>
-    				<td>Kappa</td>
-                    <td>kappa@twitch.tv</td>
-    				<td>12/12/2016 10:08:58</td>
-    			</tr>
-    			<tr>
-    				<td>Keppo</td>
-                    <td>Keppo@twitch.tv</td>
-    				<td>15/08/2016 04:11:09</td>
-    			</tr>
-    			<tr>
-    				<td>Karls</td>
-                    <td>karls@twitch.tv</td>
-    				<td>24/05/2016 14:31:16</td>
-    			</tr>
+    			<% users.forEach(function(user)  { %>
+                    <tr>
+                        <td><%= user.name %></td>
+                        <td><%= user.email %></td>
+                        <td><%= DateHelper.dateFormater(user.deleted_at) %></td>
+                    </tr>
+                <% }); %>
     		</tbody>
     	</table>
     </div>

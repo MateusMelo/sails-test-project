@@ -11,12 +11,14 @@
         <% } %>
 
         <div class="search">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar usuário...">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button">Buscar</button>
-                </span>
-            </div>
+            <form action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar usuário..." name="q" value="<%= (req.query && req.query.q) ? req.query.q : '' %>">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Buscar</button>
+                    </span>
+                </div>
+            </form>
         </div>
 
     	<table class="table table-hover">
@@ -34,7 +36,7 @@
                         <td><%= user.email %></td>
                         <td>
                             <a class="btn btn-primary btn-sm" href="/admin/users/edit/<%= user.id %>">Editar</a>
-                            <button class="btn btn-danger btn-sm remove">Excluir</button>
+                            <a class="btn btn-danger btn-sm remove" href="/admin/users/delete" data-id="<%= user.id %>">Excluir</a>
                         </td>
                     </tr>
                 <% }); %>

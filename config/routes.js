@@ -48,13 +48,9 @@ module.exports.routes = {
   'get /admin/dashboard': 'AdminController.dashboard',
   
   'get /admin/users': 'UserController.list',
-  'get /admin/users/deleted': {
-    view: 'admin/users/list_deleted',
-    locals: {
-      layout: 'admin_internal'
-    }
-  },
+  'get /admin/users/deleted': 'UserController.deleted',
   'get /admin/users/edit/:id': 'UserController.edit',
-  'post /admin/users/update': 'UserController.update'
+  'post /admin/users/update': 'UserController.update',
+  'post /admin/users/delete': 'UserController.delete'
 
 };

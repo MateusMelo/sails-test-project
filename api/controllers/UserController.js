@@ -49,11 +49,29 @@ module.exports = {
 
     list: function(req, res) {
 
-        User.find({admin: false}).exec(function(err, users) {
+        var query = { admin: false, deleted_at: null };
+        if(req.query.q)
+            query.name = {'like': '%' + req.query.q + '%'};
+
+        User.find(query).exec(function(err, users) {
             if(err)
                 return res.serverError(err);
 
             res.view('admin/users/list', {layout: 'admin_internal', users: users});
+        });
+    },
+
+    deleted: function(req, res) {
+
+        var query = { deleted_at: {'!': null} };
+        if(req.query.q)
+            query.name = {'like': '%' + req.query.q + '%'};
+
+        User.find(query).exec(function(err, users) {
+            if(err)
+                return res.serverError(err);
+
+            res.view('admin/users/list_deleted', {layout: 'admin_internal', users: users});
         });
     },
 
@@ -100,7 +118,18 @@ module.exports = {
         });
     },
     search: function() {},
-    delete: function() {}
+    delete: function(req, res) {
+
+        User.update({id: req.param('id')}, {deleted_at: new Date()}).exec(function(err, user) {
+            if(err)
+                return res.badRequest(err);
+
+            req.flash('successUserMessage', 'User successfully deleted.');
+
+            return res.redirect('admin/users');
+        });
+
+    }
 	
 };
 
