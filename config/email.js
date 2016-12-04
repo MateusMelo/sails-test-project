@@ -2,7 +2,7 @@ module.exports.email = {
 
 	service: 'Gmail',
 
-	auth: {	user: 'mateusmelodasilva@gmail.com', pass: 'Matt22@ews'	},
+	auth: {	user: '', pass: ''	},
 	
 	templateDir: 'views/confirmation',
 	
