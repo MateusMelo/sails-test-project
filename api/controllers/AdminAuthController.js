@@ -6,6 +6,7 @@ module.exports = {
 
             if ((err) || (!user)) {
             	req.flash('email', req.param('email'));
+                req.flash('loginMessage', 'Bad credentials.')
             	return res.redirect('/admin');
             }
 

@@ -7,7 +7,7 @@
             
             <% if(req.session.flash && req.session.flash.signupMessage){ %>
                <div class="alert alert-danger">
-                    <%= req.session.flash.signupMessage %>
+                    <%= req.flash('signupMessage') %>
                </div>
             <% } %>
 

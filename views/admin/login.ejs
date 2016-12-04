@@ -5,7 +5,7 @@
             <h1>Olá, Administrador!</h1>
 
             <% if (req.session.flash && req.session.flash.loginMessage) { %>
-                <div class="alert alert-danger"> <%=req.flash('loginMessage')%> </div>
+                <div class="alert alert-danger"> <%= req.flash('loginMessage') %> </div>
             <% } %>
 
             <form action="admin/login" action="" method="POST">
