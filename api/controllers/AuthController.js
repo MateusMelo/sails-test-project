@@ -4,7 +4,7 @@ module.exports = {
 
 	signup: function(req, res) {
 
-		passport.authenticate('local-signup', function(err, user, info) {
+		passport.authenticate('local-guest-signup', function(err, user, info) {
 
             if ((err) || (!user)) {
             	req.flash('name', req.param('name'));
@@ -24,7 +24,7 @@ module.exports = {
 
 	login: function(req, res) {
         
-        passport.authenticate('local-login', function(err, user, info) {
+        passport.authenticate('local-user-login', function(err, user, info) {
 
             if ((err) || (!user)) {
             	req.flash('email', req.param('email'));

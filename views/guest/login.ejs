@@ -11,7 +11,7 @@
             
             <form action="login" method="POST">
                 <div class="form-group">
-                    <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%= (req.session.flash && req.session.flash.email) ? req.flash('email')[0] : '' %>">
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%= (req.session.flash && req.session.flash.email) ? req.flash('email') : '' %>">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" id="password" placeholder="Password" name="password">

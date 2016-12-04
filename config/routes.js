@@ -43,12 +43,9 @@ module.exports.routes = {
   'get /admin': {
     view: 'admin/login'
   },
-  'get /admin/dashboard': {
-    view: 'admin/dashboard',
-    locals: {
-      layout: 'admin_internal'
-    }
-  },
+  'post /admin/login': 'AdminAuthController.login',
+  'get /admin/logout': 'AdminAuthController.logout',
+  'get /admin/dashboard': 'AdminController.dashboard',
   'get /admin/users': {
     view: 'admin/users/list',
     locals: {

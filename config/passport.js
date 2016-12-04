@@ -12,7 +12,34 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-passport.use('local-signup', new LocalStrategy({
+passport.use('local-admin-login', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback : true
+},
+function(req, email, password, done) {
+
+    User.findOne({ email: email, admin: true }, function (err, user) {
+      
+        if (err) 
+            return done(err);
+
+        if (!user)
+            return done(null, false, req.flash('loginMessage', 'Oops! Wrong email.')); // req.flash is the way to set flashdata using connect-flash
+
+        bcrypt.compare(password, user.password, function (err, res) {
+
+            if (!res)
+                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+
+            return done(null, user);
+
+        });
+
+    });
+}));
+
+passport.use('local-guest-signup', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback : true
@@ -51,7 +78,7 @@ function(req, email, password, done) {
   
 }));
 
-passport.use('local-login', new LocalStrategy({
+passport.use('local-user-login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback : true
@@ -64,7 +91,7 @@ function(req, email, password, done) {
             return done(err);
 
         if (!user)
-            return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+            return done(null, false, req.flash('loginMessage', 'Oops! Wrong email.')); // req.flash is the way to set flashdata using connect-flash
 
         bcrypt.compare(password, user.password, function (err, res) {
 
