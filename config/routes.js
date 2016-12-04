@@ -29,21 +29,15 @@ module.exports.routes = {
   'get /signup': {
     view: 'guest/signup'
   },
+  'post /signup': 'AuthController.signup',
+  'post /login': 'AuthController.login',
+  'get /logout': 'AuthController.logout',
 
 
   //User routes
-  'get /dashboard': {
-    view: 'user/dashboard',
-    locals: {
-      layout: 'user_internal'
-    }
-  },
-  'get /profile': {
-    view: 'user/profile',
-    locals: {
-      layout: 'user_internal'
-    }
-  },
+  'get /dashboard': 'UserController.dashboard',
+  'get /profile': 'UserController.profile',
+  'post /profile': 'UserController.update',
 
   //Admin routes
   'get /admin': {

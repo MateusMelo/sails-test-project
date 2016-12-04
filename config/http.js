@@ -6,7 +6,7 @@
  * Only applies to HTTP requests (not WebSockets)
  *
  * For more information on configuration, check out:
- * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
+ * http://sailssjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
 
 module.exports.http = {
@@ -22,6 +22,9 @@ module.exports.http = {
   ****************************************************************************/
 
   middleware: {
+
+    passportInit    : require('passport').initialize(),
+    passportSession : require('passport').session(),
 
   /***************************************************************************
   *                                                                          *
