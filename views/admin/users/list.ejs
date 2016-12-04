@@ -6,6 +6,10 @@
             <li class="active">Usuários</li>
         </ol>
 
+        <% if (req.session.flash && req.session.flash.successUserMessage) { %>
+            <div class="alert alert-success"> <%=req.flash('successUserMessage')%> </div>
+        <% } %>
+
         <div class="search">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Buscar usuário...">
@@ -24,30 +28,16 @@
 	    		</tr>
     		</thead>
     		<tbody>
-    			<tr>
-    				<td>Kappa</td>
-    				<td>kappa@twitch.tv</td>
-    				<td>
-    					<a href="/admin/users/edit">Editar</a>
-    					<a class="remove" href="">Excluir</a>
-    				</td>
-    			</tr>
-    			<tr>
-    				<td>Keppo</td>
-    				<td>Keppo@twitch.tv</td>
-    				<td>
-    					<a href="/admin/users/edit">Editar</a>
-    					<a class="remove" href="">Excluir</a>
-    				</td>
-    			</tr>
-    			<tr>
-    				<td>Karls</td>
-    				<td>Karls@twitch.tv</td>
-    				<td>
-    					<a href="/admin/users/edit">Editar</a>
-    					<a class="remove" href="">Excluir</a>
-    				</td>
-    			</tr>
+                <% users.forEach(function(user)  { %>
+                    <tr>
+                        <td><%= user.name %></td>
+                        <td><%= user.email %></td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="/admin/users/edit/<%= user.id %>">Editar</a>
+                            <button class="btn btn-danger btn-sm remove">Excluir</button>
+                        </td>
+                    </tr>
+                <% }); %>
     		</tbody>
     	</table>
     </div>

@@ -37,7 +37,7 @@ module.exports.routes = {
   //User routes
   'get /dashboard': 'UserController.dashboard',
   'get /profile': 'UserController.profile',
-  'post /profile': 'UserController.update',
+  'post /profile': 'UserController.postProfile',
 
   //Admin routes
   'get /admin': {
@@ -46,23 +46,15 @@ module.exports.routes = {
   'post /admin/login': 'AdminAuthController.login',
   'get /admin/logout': 'AdminAuthController.logout',
   'get /admin/dashboard': 'AdminController.dashboard',
-  'get /admin/users': {
-    view: 'admin/users/list',
-    locals: {
-      layout: 'admin_internal'
-    }
-  },
+  
+  'get /admin/users': 'UserController.list',
   'get /admin/users/deleted': {
     view: 'admin/users/list_deleted',
     locals: {
       layout: 'admin_internal'
     }
   },
-  'get /admin/users/edit': {
-    view: 'admin/users/edit',
-    locals: {
-      layout: 'admin_internal'
-    }
-  }
+  'get /admin/users/edit/:id': 'UserController.edit',
+  'post /admin/users/update': 'UserController.update'
 
 };
