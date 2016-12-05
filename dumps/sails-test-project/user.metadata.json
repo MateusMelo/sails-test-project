@@ -1,0 +1,1 @@
+{"options":{"autoIndexId":true},"indexes":[{"ns":"sails-test-project.user","v":1,"key":{"_id":1},"name":"_id_"},{"v":1,"unique":true,"key":{"email":1.0},"name":"email_1","ns":"sails-test-project.user"}]}
