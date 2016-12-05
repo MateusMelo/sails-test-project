@@ -100,12 +100,17 @@ module.exports = {
         if(!data.password)
             delete data.password;
 
+        if(!data.email) {
+            req.flash('userMessage', 'O Email deve ser preenchido.')
+            return res.redirect('back');
+        }
+
         User.findOne({ 
             id: {'!': req.param('id')},
             email: data.email
         }).exec(function(err, user) {
             if(user) {
-                req.flash('userMessage', 'That email is already taken.')
+                req.flash('userMessage', 'Endereço de email já está em uso..')
                 res.type('html');
                 return res.redirect('back');
             } else {
@@ -114,7 +119,7 @@ module.exports = {
                     if(err)
                         return res.badRequest(err);
 
-                    req.flash('successUserMessage', 'User successfully updated.');
+                    req.flash('successUserMessage', 'Dados do usuário atualizados.');
 
                     return res.redirect('admin/users');
                 });
@@ -129,7 +134,7 @@ module.exports = {
             if(err)
                 return res.badRequest(err);
 
-            req.flash('successUserMessage', 'User successfully deleted.');
+            req.flash('successUserMessage', 'Usuário deletado.');
 
             return res.redirect('admin/users');
         });

@@ -2,11 +2,17 @@ var passport = require('passport');
 
 module.exports = {
 	login: function(req, res) {
+
+        if(!RequestValidator.checkParams(req.allParams())) {
+            req.flash('email', req.param('email'));
+            req.flash('loginMessage', 'Preencha todos campos.')
+            return res.redirect('/admin');
+        }
+
 		passport.authenticate('local-admin-login', function(err, user, info) {
 
             if ((err) || (!user)) {
             	req.flash('email', req.param('email'));
-                req.flash('loginMessage', 'Bad credentials.')
             	return res.redirect('/admin');
             }
 
