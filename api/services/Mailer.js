@@ -7,9 +7,7 @@ module.exports.sendConfirmationMail = function(obj) {
 			},
 			{
 				to: obj.email,
-				subject: '[SailsTestProject] Confirmation Email'
-			}, function(err) {
-				console.log(err || 'Mail Sent!');
-			}
+				subject: '[SailsTestProject] Email de Confirmação'
+			}, function(err) {}
 	)
 }

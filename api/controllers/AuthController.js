@@ -23,6 +23,8 @@ module.exports = {
 				Mailer.sendConfirmationMail(user);
 			}
 
+            req.flash('successSignupMessage', 'Seu cadastro foi relizado, enviaremos para o seu email uma confirmação de seu cadastro. .')
+
             return res.redirect('/');
 
         })(req, res);
