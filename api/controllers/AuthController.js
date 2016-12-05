@@ -4,10 +4,16 @@ module.exports = {
 
 	signup: function(req, res) {
 
+        if(!RequestValidator.checkParams(req.allParams())) {
+            req.flash('name', req.param('name'));
+            req.flash('email', req.param('email'));
+            req.flash('signupMessage', 'Preencha todos campos.')
+            return res.redirect('/signup');
+        }
+
 		passport.authenticate('local-guest-signup', function(err, user, info) {
 
             if ((err) || (!user)) {
-                req.flash('signupMessage', 'Bad credentials.')
             	req.flash('name', req.param('name'));
             	req.flash('email', req.param('email'));
             	return res.redirect('/signup');
@@ -25,10 +31,15 @@ module.exports = {
 
 	login: function(req, res) {
 
+        if(!RequestValidator.checkParams(req.allParams())) {
+            req.flash('email', req.param('email'));
+            req.flash('loginMessage', 'Preencha todos campos.')
+            return res.redirect('/');
+        }
+
         passport.authenticate('local-user-login', function(err, user, info) {
 
             if ((err) || (!user)) {
-                req.flash('loginMessage', 'Bad credentials.')
             	req.flash('email', req.param('email'));
             	return res.redirect('/');
             }

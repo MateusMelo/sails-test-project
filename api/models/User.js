@@ -4,12 +4,10 @@ module.exports = {
 
 	attributes: {
 		name: {
-			type: 'string',
-			required: true
+			type: 'string'
 		},
 		email: {
 			type: 'email',
-			required: true,
 			unique: true
 		},
 		password: {

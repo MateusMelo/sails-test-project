@@ -22,12 +22,17 @@ module.exports = {
         	delete data.password;
         }
 
+        if(!data.email) {
+            req.flash('profileMessage', 'O Email deve ser preenchido.')
+            return res.redirect('/profile');
+        }
+
         User.findOne({ 
         	id: {'!': req.session.user.id},
         	email: data.email
         }).exec(function(err, user) {
         	if(user) {
-        		req.flash('profileMessage', 'That email is already taken.')
+        		req.flash('profileMessage', 'Endereço de email já está em uso.')
         		res.type('html');
         		return res.redirect('/profile');
         	} else {
@@ -38,7 +43,7 @@ module.exports = {
 
 					req.session.user = user[0];
 
-					req.flash('successProfileMessage', 'Profile updated successfully');
+					req.flash('successProfileMessage', 'Dados atualizados.');
 
 					return res.redirect('/profile');
 				});
